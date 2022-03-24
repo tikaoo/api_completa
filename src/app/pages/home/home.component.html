@@ -1,0 +1,27 @@
+<style>
+    .container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+    }
+</style>
+
+<div class="container">
+    <mat-form-field>
+        <mat-label> Pesquise um produto</mat-label>
+        <input 
+        appearance="outline"
+        type="text" 
+        matInput
+        [(ngModel)]="productName"
+        (keyup.enter)="findProduct()"
+        (input)="debounceTest()"
+        >
+
+    </mat-form-field>
+    <a routerLink="/new"> Crie um novo produto</a>
+    <a routerLink="/products">Ver todos os produtos</a>
+</div>
+<router-outlet></router-outlet>

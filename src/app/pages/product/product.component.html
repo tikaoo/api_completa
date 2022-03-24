@@ -1,0 +1,50 @@
+<style>
+.container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+}
+.card{
+    width:fit-content;
+    
+}
+.card-img{
+    
+    max-height: 400px;
+}
+a{
+    color: white;
+}
+
+</style>
+
+<div class="container" *ngIf="prod!=undefined" id="product">
+
+<mat-card class="card">
+<img [src]=" prod.picture" mat-card-image class="card-img" >
+
+<mat-card-header>
+
+</mat-card-header>
+<mat-card-title> {{prod.name}} </mat-card-title>
+<mat-card-subtitle> {{prod.price | currency:'BRL'}} </mat-card-subtitle>
+<mat-card-actions>
+    <button mat-raised-button color="accent" routerLink="/">
+         <mat-icon>arrow_left</mat-icon>
+    </button>
+    <button mat-raised-button color="warm" 
+    matTooltip="quer realmente Deletar esse produto?"
+    (click)="delete(prod.id || 0)">
+
+        <mat-icon>delete</mat-icon>
+
+   </button>
+   <button mat-mat-raised-button color="accent" (click)="edit()">
+    <mat-icon> edit</mat-icon></button>
+</mat-card-actions>
+
+</mat-card>
+</div>
