@@ -37,7 +37,9 @@ productForm : FormGroup =  this.fb.group({
         this.prodApiService.creatProduct(product).subscribe(
           () => {
             /*this.router.navigateByUrl('/home')*/
-            this.router.navigateByUrl(`/product/${this.productForm.get('name')?.value}`)
+            let product =this.productForm.get('name')?.value
+            this.productForm.reset()
+            this.router.navigateByUrl(`/product/${product}`)
           },
           (error) => {
             this.snack.open('Houve um erro ao salvar o produto.Foi mal :(')
@@ -48,6 +50,13 @@ productForm : FormGroup =  this.fb.group({
       picture.setErrors({incorrect:true})
 
     }
+  }
+
+  canDeactivate(){
+    if(this.productForm.dirty) {
+      return confirm('Os dados não foram salvos. Deseja realmente sair?')
+    }
+    return true;
   }
 
 }

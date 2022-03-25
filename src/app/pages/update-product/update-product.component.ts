@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsApiService } from 'src/app/services/products-api.service';
 import * as Validator from 'Validator'
 import { Product } from 'src/app/models/product';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 
 @Component({
@@ -38,9 +39,9 @@ export class UpdateProductComponent implements OnInit {
    let price = this.route.snapshot.queryParamMap.get('price')
    let picture = this.route.snapshot.queryParamMap.get('picture')
 
-   this.productForm.get('name')?.setValue('name')
-   this.productForm.get('price')?.setValue('price')
-   this.productForm.get('picture')?.setValue('picture')
+   this.productForm.get('name')?.setValue(name)
+   this.productForm.get('price')?.setValue(price)
+   this.productForm.get('picture')?.setValue(picture)
   }
 
   saveProduct(): void{
@@ -54,10 +55,12 @@ export class UpdateProductComponent implements OnInit {
         this.prodApiService.updateProduct(product).subscribe(
           () => {
             /*this.router.navigateByUrl('/home')*/
-            this.router.navigateByUrl(`/product/${this.productForm.get('name')?.value}`)
+            let product =this.productForm.get('name')?.value
+            this.productForm.reset()
+            this.router.navigateByUrl(`/product/${product}`)
           },
           (error) => {
-            this.snack.open('Houve um erro ao salvar o produto.Foi mal :(')
+            this.snack.open('Houve um erro ao salvar o produto.Foi mal :(','fechar')
           }
         )
     }else {
@@ -66,4 +69,13 @@ export class UpdateProductComponent implements OnInit {
 
     }
   }
+
+  canDeactivate(){
+    if(this.productForm.dirty) {
+      return confirm('Os dados não foram salvos. Deseja realmente sair?')
+    }
+    return true;
+  }
+
+
 }

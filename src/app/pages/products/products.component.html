@@ -6,7 +6,7 @@
       <mat-card-title> {{ p.name }} </mat-card-title>
       <mat-card-subtitle> {{ p.price | currency: "BRL" }} </mat-card-subtitle>
       <mat-card-actions>
-        <button mat-raised-button color="accent" [routerLink]="'/products/'+ p.name">
+        <button mat-raised-button color="accent" [routerLink]="'/product/'+ p.name">
              <mat-icon>+</mat-icon>
         </button>
       </mat-card-actions>  

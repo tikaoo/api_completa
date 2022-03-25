@@ -46,6 +46,6 @@ export class ProductComponent implements OnInit {
     )
   }
   edit(): void {
-    this.router.navigateByUrl(`/update?/id=${this.prod.id}&name=${this.prod.name}&price=${this.prod.price}&picture=${this.prod.picture}`)/*query param*/
+    this.router.navigateByUrl(`/update?id=${this.prod.id}&name=${this.prod.name}&price=${this.prod.price}&picture=${this.prod.picture}`)/*query param*/
   }
 }
